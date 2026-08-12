@@ -216,3 +216,11 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+data/
+EGOFALLS/
+data_corrupted/
+*.pt
+*.mp4
+__pycache__/
+*.pyc
+kaggle.json
