@@ -30,7 +30,7 @@ Camera (egocentric)
 
 ```
 HelmetGuard/
-├── interfaces.py        # Hợp đồng input/output giữa 4 module — ĐỌC FILE NÀY TRƯỚC KHI CODE
+├── interface.py         # Hợp đồng input/output giữa 4 module — ĐỌC FILE NÀY TRƯỚC KHI CODE
 ├── cv_module.py          # Track 1 — optical flow + horizon detection
 ├── audio_module.py       # Track 3 — TTS hỏi thăm + ASR/keyword phân loại phản hồi
 ├── decision_module.py    # Track 4 — rule-based fusion + gửi cảnh báo (SMS/GPS)
@@ -84,7 +84,7 @@ Nguồn dataset đang dùng:
 - **CCD (Car Crash Dataset)** — dashcam, có tình huống đang di chuyển → va chạm — [github.com/Cogito2012/CarCrashDataset](https://github.com/Cogito2012/CarCrashDataset)
 - Data tự quay: normal riding + mô phỏng ngã có kiểm soát (xem thư mục `data/`, log điều kiện quay trong Google Sheets chung)
 
-### 4. Chạy thử pipeline (sau khi các module đã implement theo `interfaces.py`)
+### 4. Chạy thử pipeline (sau khi các module đã implement theo `interface.py`)
 
 ```bash
 python main.py
@@ -92,7 +92,7 @@ python main.py
 
 ## Quy tắc làm việc chung
 
-- **Đọc `interfaces.py` trước khi code bất kỳ module nào** — đây là hợp đồng input/output đã chốt, mỗi track implement đúng chữ ký hàm để Track 6 ghép được mà không cần sửa lại.
+- **Đọc `interface.py` trước khi code bất kỳ module nào** — đây là hợp đồng input/output đã chốt, mỗi track implement đúng chữ ký hàm để Track 6 ghép được mà không cần sửa lại.
 - Mỗi track code trong file riêng, commit/push thường xuyên — tránh sửa trực tiếp file của track khác.
 - Không commit dataset (`.mp4`, `.zip` lớn) hoặc `kaggle.json`/API token lên Git — đã có trong `.gitignore`.
 - Model benchmark trên QCS8550 dùng Qualcomm AI Hub, ưu tiên runtime **QNN** thay vì TFLITE (nhanh hơn đáng kể theo số liệu đã đo).
