@@ -1,0 +1,15 @@
+numpy
+# Keep both packages on the same version for qai-hub-models and headless servers.
+opencv-python>4,<=4.13.0.92
+opencv-python-headless>4,<=4.13.0.92
+
+# audio_module.py
+sounddevice
+scipy
+pyttsx3
+transformers
+torch
+twilio
+# train_model.py / deploy_qcs8550.py
+torchvision
+qai_hub
