@@ -27,16 +27,25 @@ import numpy as np
 # ============================================================
 # MODULE 1 — CV (Track 1: optical flow + horizon detection)
 # ============================================================
+class CVDecision(str, Enum):
+    NORMAL = "normal"
+    SUSPECT = "suspect"
+    FALL = "fall"
 
 @dataclass
 class CVResult:
-    """Output cua module CV sau khi phan tich 1 cua so video (vi du 2-3 giay)."""
-    anomaly_score: float          # 0.0 (binh thuong) -> 1.0 (rat bat thuong)
-    is_suspect: bool              # True neu anomaly_score vuot nguong, dung de trigger Module 3
-    signal_source: str            # "optical_flow" | "horizon" | "combined" - de debug biet tin hieu nao trigger
-    timestamp: float              # unix timestamp cua cua so video vua xu ly
-    debug_info: Optional[dict] = field(default_factory=dict)  # optional, cho phep nhet them so lieu debug (vd optical flow magnitude trung binh)
+    """Kết quả chuẩn hóa từ CV heuristic hoặc hybrid detector."""
 
+    anomaly_score: float
+    is_suspect: bool
+    signal_source: str
+    timestamp: float
+
+    heuristic_score: float = 0.0
+    deep_score: Optional[float] = None
+    decision: CVDecision = CVDecision.NORMAL
+    inference_ms: float = 0.0
+    debug_info: dict = field(default_factory=dict)
 
 def detect_anomaly(frames: list[np.ndarray], fps: float = 30.0) -> CVResult:
     """

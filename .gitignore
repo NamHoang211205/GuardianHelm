@@ -217,8 +217,11 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 data/
+data
 EGOFALLS/
 data_corrupted/
+alerts_queue.db
+debug_recordings/
 *.pt
 *.mp4
 __pycache__/
